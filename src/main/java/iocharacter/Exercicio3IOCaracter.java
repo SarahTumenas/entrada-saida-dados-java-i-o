@@ -32,11 +32,33 @@ public class Exercicio3IOCaracter {
                 file.getName(),file.length());
         System.out.printf("Arquivo \"%s\" criado com sucesso! Com o tamanho '%d' bytes \n",
                 filecopy.getName(), filecopy.length());
+
+        PrintWriter pw = new PrintWriter(System.out);
+        pw.println("Recomende 3 livros: ");
+        pw.flush();
+
+        adicionarLivros(filecopy.getName());
+
+        pw.printf("Ok! Tudo certo. Tamanho do arquivo '%d' bytes.", filecopy.length());
+
+        br.close();
+        bw.close();
+        pw.close();
+
     }
 
-    public static void adicionarLivros(){
+    public static void adicionarLivros(String arquivo) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
 
+        BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 
+        do {
+            bw.write(line);
+            bw.newLine();
+            bw.flush();
+            line = br.readLine();
+        } while(!(line.equalsIgnoreCase("fim")));
 
     }
 
