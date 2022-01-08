@@ -5,7 +5,7 @@ import java.io.*;
 public class ExemploIOObject {
 
     public static void serealizacao () throws IOException {
-        Gato gato = new Gato("Nego Vader",9, "preto");
+        Gato gato = new Gato("Nego Vader",9, "preto", true, true);
 
         File file = new File("gato");
         /*OutputStream os = new FileOutputStream(file.getName());
@@ -20,9 +20,23 @@ public class ExemploIOObject {
         ps.close();
     }
 
-    public static void desserealizacao(String arquivo){}
+    public static void desserealizacao(String arquivo) throws IOException, ClassNotFoundException {
+        /*InputStream is = new FileInputStream(arquivo);
+        ObjectInputStream ois = new ObjectInputStream(is);*/
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo));
+        Gato objetoGato = (Gato) ois.readObject();
+        System.out.printf("\nNome..................: %s\n", objetoGato.getNome());
+        System.out.printf("Idade............: %d\n", objetoGato.getIdade());
+        System.out.printf("Cor...............: %s\n",objetoGato.getCor());
+        System.out.printf("Castrado...............: %s\n",objetoGato.isCastrado());
+        System.out.printf("Ronrona...............: %s\n",objetoGato.isRonrona());
+        System.out.println(objetoGato);
 
-    public static void main(String[] args) throws IOException {
-        serealizacao();
+        ois.close();
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //serealizacao();
+        desserealizacao("F:\\Bootcamp Amdocs Java Developer\\EntradaSaidaDadosIOJava\\gato");
     }
 }
