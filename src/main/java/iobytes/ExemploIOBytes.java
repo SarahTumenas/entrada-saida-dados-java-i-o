@@ -1,6 +1,6 @@
 package iobytes;
 
-/*Fazer cópia do arquivo “recomendacoes-copy.txt”*/
+
 import java.io.*;
 
 public class ExemploIOBytes {
